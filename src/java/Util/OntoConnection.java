@@ -25,7 +25,7 @@ public class OntoConnection {
     
     public static OntModel OntoConnection(){
         
-        String f = "E:\\Mestrado\\Projetos\\Seco 5\\seco 5.owl";        
+        String f = "C:\\Seco 5\\seco 5.owl";        
         OntModelSpec especRacioc = OntModelSpec.OWL_DL_MEM;
         OntModel seco = ModelFactory.createOntologyModel(especRacioc, null);
         OntModel data = ModelFactory.createOntologyModel(especRacioc, null);
