@@ -98,7 +98,7 @@ public class WSSeco {
     @GET
     @Produces(MediaType.APPLICATION_XML)
     @Path("getheterogeneity")
-    public List<IndividualModel> getHeterogeneity() {
+    public List<PlatformModel> getHeterogeneity() {
         
         return OntoController.returnHeterogeneity();
         
@@ -107,7 +107,7 @@ public class WSSeco {
     @GET
     @Produces(MediaType.APPLICATION_XML)
     @Path("getregenerationability")
-    public List<IndividualModel> getRegenerationAbility() {
+    public List<PlatformModel> getRegenerationAbility() {
         
         return OntoController.returnRegenerationAbility();
         
@@ -116,7 +116,7 @@ public class WSSeco {
     @GET
     @Produces(MediaType.APPLICATION_XML)
     @Path("geteffortbalance")
-    public List<IndividualModel> getEffortBalance() {
+    public List<PlatformModel> getEffortBalance() {
         
         return OntoController.returnEffortBalance();
         

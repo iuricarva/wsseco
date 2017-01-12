@@ -39,6 +39,69 @@ public class PlatformModel {
     private String supportNaturalLanguages;
     private String nameDevTech1;
     private String nameDevTech2;
+    private String nameNode1;
+    private String nameNode2;
+    private int timeWorkTogether;
+    private int developerCommits;
+    private int developerHoursWork;
+    private int numberOfReleases;
+    private boolean activeDeveloper;
+
+    public int getDeveloperCommits() {
+        return developerCommits;
+    }
+
+    public void setDeveloperCommits(int developerCommits) {
+        this.developerCommits = developerCommits;
+    }
+
+    public int getDeveloperHoursWork() {
+        return developerHoursWork;
+    }
+
+    public void setDeveloperHoursWork(int developerHoursWork) {
+        this.developerHoursWork = developerHoursWork;
+    }
+
+    public int getNumberOfReleases() {
+        return numberOfReleases;
+    }
+
+    public void setNumberOfReleases(int numberOfReleases) {
+        this.numberOfReleases = numberOfReleases;
+    }
+
+    public boolean isActiveDeveloper() {
+        return activeDeveloper;
+    }
+
+    public void setActiveDeveloper(boolean activeDeveloper) {
+        this.activeDeveloper = activeDeveloper;
+    }
+
+    public int getTimeWorkTogether() {
+        return timeWorkTogether;
+    }
+
+    public void setTimeWorkTogether(int timeWorkTogether) {
+        this.timeWorkTogether = timeWorkTogether;
+    }
+
+    public String getNameNode1() {
+        return nameNode1;
+    }
+
+    public void setNameNode1(String nameNode1) {
+        this.nameNode1 = nameNode1;
+    }
+
+    public String getNameNode2() {
+        return nameNode2;
+    }
+
+    public void setNameNode2(String nameNode2) {
+        this.nameNode2 = nameNode2;
+    }
     private String haveDocumentation;
 
     public String getNameSupport1() {

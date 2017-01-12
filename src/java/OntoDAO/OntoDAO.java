@@ -313,11 +313,11 @@ public class OntoDAO {
         }
     }
     
-    public static ArrayList<IndividualModel> returnHeterogeneity(){
+    public static ArrayList<PlatformModel> returnHeterogeneity(){
         
-        IndividualModel model;
+        PlatformModel model;
         OntModel seco = OntoConnection.OntoConnection();
-        ArrayList<IndividualModel> Result = new ArrayList<IndividualModel>();
+        ArrayList<PlatformModel> Result = new ArrayList<PlatformModel>();
         
         if(seco != null){
         
@@ -332,9 +332,15 @@ public class OntoDAO {
                     "PREFIX seco: <http://www.seco.com/ontoloy/seco.owl#>\n" +
                     "PREFIX swrl: <http://www.semanticweb.org/icarv/ontologies/2016/7/seco-4.owl#>\n" +
                     "	SELECT *\n" +
-                    "   WHERE { \n" +
-                    "		?k rdf:type ?<http://www.semanticweb.org/icarv/ontologies/2016/7/seco-4.owl#Heterogeneity>.  \n" +
-                    "	}";
+                    "	WHERE { ?k seco:isDevelopedOf ?a.\n" +
+                    "	        ?k seco:isDevelopedOf ?b.\n" +
+                    "	        ?a swrl:hasLiveDifferentCountry ?b.\n" +
+                    "	        ?k swrl:hasLinkTo ?w.\n" +
+                    "           ?k swrl:hasLinkTo ?z.\n" +
+                    "           ?w swrl:hasNetworkNode ?z.\n" +
+                    "           ?k seco:hasSuport ?c.\n" +
+                    "           ?k seco:hasSuport ?d.\n" +
+                    "           ?c swrl:hasSemanticDistance ?d}";
 
 
 
@@ -344,9 +350,21 @@ public class OntoDAO {
                     ResultSet resultado = qexec.execSelect();
                 while(resultado.hasNext()) {
                     QuerySolution linha = (QuerySolution) resultado.next();
-                    model = new IndividualModel();
+                    model = new PlatformModel();
                     RDFNode subject = linha.get("k");
                     model.setName(subject.toString().replace("http://www.seco.com/ontoloy/seco.owl#", ""));
+                    subject = linha.get("a");
+                    model.setNameDeveloper1(subject.toString().replace("http://www.semanticweb.org/icarv/ontologies/2016/7/seco-4.owl#", ""));
+                    subject = linha.get("b");
+                    model.setNameDeveloper2(subject.toString().replace("http://www.semanticweb.org/icarv/ontologies/2016/7/seco-4.owl#", ""));
+                    subject = linha.get("c");
+                    model.setNameSupport1(subject.toString().replace("http://www.semanticweb.org/icarv/ontologies/2016/7/seco-4.owl#", ""));
+                    subject = linha.get("d");
+                    model.setNameSupport2(subject.toString().replace("http://www.semanticweb.org/icarv/ontologies/2016/7/seco-4.owl#", ""));
+                    subject = linha.get("w");
+                    model.setNameNode1(subject.toString().replace("http://www.semanticweb.org/icarv/ontologies/2016/7/seco-4.owl#", ""));
+                    subject = linha.get("z");
+                    model.setNameNode2(subject.toString().replace("http://www.semanticweb.org/icarv/ontologies/2016/7/seco-4.owl#", ""));
                     Result.add(model);
                 }
                 return Result;
@@ -355,11 +373,12 @@ public class OntoDAO {
         }
     }
     
-    public static ArrayList<IndividualModel> returnRegenerationAbility(){
+    public static ArrayList<PlatformModel> returnRegenerationAbility(){
         
-        IndividualModel model;
+        PlatformModel model;
         OntModel seco = OntoConnection.OntoConnection();
-        ArrayList<IndividualModel> Result = new ArrayList<IndividualModel>();
+        ArrayList<PlatformModel> Result = new ArrayList<PlatformModel>();
+        String trata;
         
         if(seco != null){
         
@@ -374,9 +393,9 @@ public class OntoDAO {
                     "PREFIX seco: <http://www.seco.com/ontoloy/seco.owl#>\n" +
                     "PREFIX swrl: <http://www.semanticweb.org/icarv/ontologies/2016/7/seco-4.owl#>\n" +
                     "	SELECT *\n" +
-                    "   WHERE { \n" +
-                    "		?k rdf:type ?<http://www.semanticweb.org/icarv/ontologies/2016/7/seco-4.owl#RegenerationAbility>.  \n" +
-                    "	}";
+                    "	WHERE {?a seco:hasMaintained ?k.\n" +
+                    "          ?a swrl:timeWorkTogether ?t.\n" +
+                    "          ?k swrl:hasNewMember ?b}";
 
 
 
@@ -385,10 +404,22 @@ public class OntoDAO {
                     QueryExecution qexec = QueryExecutionFactory.create(consulta,dataset);
                     ResultSet resultado = qexec.execSelect();
                 while(resultado.hasNext()) {
+                    trata = "";
                     QuerySolution linha = (QuerySolution) resultado.next();
-                    model = new IndividualModel();
+                    model = new PlatformModel();
                     RDFNode subject = linha.get("k");
                     model.setName(subject.toString().replace("http://www.seco.com/ontoloy/seco.owl#", ""));
+                    subject = linha.get("t");
+                    trata = subject.toString().replace("http://www.seco.com/ontoloy/seco.owl#", "");
+                    trata = trata.replace("^^","");
+                    trata = trata.replace("\"","");
+                    trata = trata.replace("<","");
+                    trata = trata.replace(">","");
+                    trata = trata.replace("http://www.w3.org/2001/XMLSchema#int","");
+                    model.setTimeWorkTogether(Integer.parseInt(trata));
+                    subject = linha.get("b");
+                    model.setNameDeveloper1(subject.toString().replace("http://www.semanticweb.org/icarv/ontologies/2016/7/seco-4.owl#", ""));
+
                     Result.add(model);
                 }
                 return Result;
@@ -397,11 +428,12 @@ public class OntoDAO {
         }
     }
     
-    public static ArrayList<IndividualModel> returnEffortBalance(){
+    public static ArrayList<PlatformModel> returnEffortBalance(){
         
-        IndividualModel model;
+        PlatformModel model;
         OntModel seco = OntoConnection.OntoConnection();
-        ArrayList<IndividualModel> Result = new ArrayList<IndividualModel>();
+        ArrayList<PlatformModel> Result = new ArrayList<PlatformModel>();
+        String trata;
         
         if(seco != null){
         
@@ -416,9 +448,14 @@ public class OntoDAO {
                     "PREFIX seco: <http://www.seco.com/ontoloy/seco.owl#>\n" +
                     "PREFIX swrl: <http://www.semanticweb.org/icarv/ontologies/2016/7/seco-4.owl#>\n" +
                     "	SELECT *\n" +
-                    "   WHERE { \n" +
-                    "		?k rdf:type ?<http://www.semanticweb.org/icarv/ontologies/2016/7/seco-4.owl#EffortBalance>.  \n" +
-                    "	}";
+                    "	WHERE { ?k seco:isDevelopedOf ?a.\n" +
+                    "	        ?a swrl:DeveloperCommits ?c.\n" +
+                    "           ?k seco:isDevelopedOf ?b.\n" +
+                    "           ?b swrl:DeveloperHoursWork ?h.\n" +
+                    "           ?k seco:isDevelopedOf ?d.\n" +
+                    "           ?d swrl:ActiveDeveloper ?t.\n" +
+                    "		?k seco:isDevelopedOf ?e.\n" +
+                    "           ?e swrl:NumberOfReleases ?r}";
 
 
 
@@ -427,10 +464,43 @@ public class OntoDAO {
                     QueryExecution qexec = QueryExecutionFactory.create(consulta,dataset);
                     ResultSet resultado = qexec.execSelect();
                 while(resultado.hasNext()) {
+                    trata = "";
                     QuerySolution linha = (QuerySolution) resultado.next();
-                    model = new IndividualModel();
+                    model = new PlatformModel();
                     RDFNode subject = linha.get("k");
                     model.setName(subject.toString().replace("http://www.seco.com/ontoloy/seco.owl#", ""));
+                    subject = linha.get("c");
+                    trata = subject.toString().replace("http://www.seco.com/ontoloy/seco.owl#", "");
+                    trata = trata.replace("^^","");
+                    trata = trata.replace("\"","");
+                    trata = trata.replace("<","");
+                    trata = trata.replace(">","");
+                    trata = trata.replace("http://www.w3.org/2001/XMLSchema#int","");
+                    model.setDeveloperCommits(Integer.parseInt(trata));
+                    subject = linha.get("h");
+                    trata = subject.toString().replace("http://www.seco.com/ontoloy/seco.owl#", "");
+                    trata = trata.replace("^^","");
+                    trata = trata.replace("\"","");
+                    trata = trata.replace("<","");
+                    trata = trata.replace(">","");
+                    trata = trata.replace("http://www.w3.org/2001/XMLSchema#int","");
+                    model.setDeveloperHoursWork(Integer.parseInt(trata));
+                    subject = linha.get("t");
+                    trata = subject.toString().replace("http://www.seco.com/ontoloy/seco.owl#", "");
+                    trata = trata.replace("^^","");
+                    trata = trata.replace("\"","");
+                    trata = trata.replace("<","");
+                    trata = trata.replace(">","");
+                    trata = trata.replace("http://www.w3.org/2001/XMLSchema#boolean","");
+                    model.setActiveDeveloper(Boolean.valueOf(trata));
+                    subject = linha.get("r");
+                    trata = subject.toString().replace("http://www.seco.com/ontoloy/seco.owl#", "");
+                    trata = trata.replace("^^","");
+                    trata = trata.replace("\"","");
+                    trata = trata.replace("<","");
+                    trata = trata.replace(">","");
+                    trata = trata.replace("http://www.w3.org/2001/XMLSchema#int","");
+                    model.setNumberOfReleases(Integer.parseInt(trata));
                     Result.add(model);
                 }
                 return Result;

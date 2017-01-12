@@ -51,15 +51,15 @@ public class OntoController {
         return Dados;    
     }
     
-    public static ArrayList<IndividualModel> returnHeterogeneity(){
+    public static ArrayList<PlatformModel> returnHeterogeneity(){
         return OntoDAO.returnHeterogeneity();
     }
     
-    public static ArrayList<IndividualModel> returnRegenerationAbility(){
+    public static ArrayList<PlatformModel> returnRegenerationAbility(){
         return OntoDAO.returnRegenerationAbility();
     }
     
-    public static ArrayList<IndividualModel> returnEffortBalance(){
+    public static ArrayList<PlatformModel> returnEffortBalance(){
         return OntoDAO.returnEffortBalance();
     }
     
